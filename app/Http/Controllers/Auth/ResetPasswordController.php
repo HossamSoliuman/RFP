@@ -32,15 +32,15 @@ class ResetPasswordController extends Controller
         
         if(auth()->user()->role=='admin')
         {
-            return route('admin.profile');
+            return route('admin.show_tickets');
         }
         if(auth()->user()->role=='presales')
         {
-            return route('presales.profile');
+            return route('presales.requests');
         }
         if(auth()->user()->role=='team_sales_member')
         {
-            return route('sales.profile');
+            return route('sales.create_ticket');
         }
         
     }
