@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 06, 2023 at 11:43 AM
+-- Generation Time: Mar 27, 2023 at 12:37 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -49,16 +49,6 @@ CREATE TABLE `migrations` (
   `batch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `migrations`
---
-
-INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(1, '2014_10_12_000000_create_users_table', 1),
-(2, '2014_10_12_100000_create_password_resets_table', 1),
-(3, '2019_08_19_000000_create_failed_jobs_table', 1),
-(4, '2019_12_14_000001_create_personal_access_tokens_table', 1);
-
 -- --------------------------------------------------------
 
 --
@@ -71,45 +61,6 @@ CREATE TABLE `options` (
   `question_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `options`
---
-
-INSERT INTO `options` (`id`, `name`, `question_id`) VALUES
-(24, 'o1', 33),
-(25, 'o2', 33),
-(26, 'o3', 33),
-(27, 'c1', 34),
-(28, 'c2', 34),
-(29, 'c4', 34),
-(30, 'o1', 35),
-(31, 'o2', 35),
-(32, 'o3', 35),
-(33, 'ch1', 39),
-(34, 'ch2', 39),
-(35, 'ch3', 39),
-(36, 'r1', 40),
-(37, 'e3', 40),
-(38, 't5', 40),
-(39, 'ch1', 41),
-(40, 'ch2', 41),
-(41, 'check3', 41),
-(42, 'r1', 42),
-(43, 'r3', 42),
-(44, 'r6', 42),
-(45, 'one', 43),
-(46, 'tow', 43),
-(47, 'three 3', 43),
-(48, 'four', 43),
-(49, 'r1', 44),
-(50, 'e4', 44),
-(51, 't5', 44),
-(52, 'option1', 46),
-(53, 'option2', 46),
-(54, 'option1', 47),
-(55, 'op2', 47),
-(56, 'op 3', 47);
-
 -- --------------------------------------------------------
 
 --
@@ -121,13 +72,6 @@ CREATE TABLE `password_resets` (
   `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `password_resets`
---
-
-INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
-('hs1876@fayoum.edu.eg', '$2y$10$0fyzcb6YhAAe3.F96VY3gewl2jKMhHvVZafTWwmeD8JJTwvcIXz2K', '2023-03-05 16:42:36');
 
 -- --------------------------------------------------------
 
@@ -165,17 +109,6 @@ CREATE TABLE `proposals` (
   `updated_at` datetime NOT NULL,
   `is_approved` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `proposals`
---
-
-INSERT INTO `proposals` (`id`, `ticket_name`, `proposal`, `comment`, `request_review`, `type`, `created_at`, `updated_at`, `is_approved`) VALUES
-(18, 'sales_member_presales_member_1', '1677609255.pdf', 'this is first proposal', '0', 'proposal', '2023-02-28 20:34:15', '2023-02-28 22:19:12', 1),
-(19, 'sales_member_presales_member_1', '0', '0', 'please add something', 'review', '2023-02-28 20:35:38', '2023-02-28 22:19:12', 1),
-(21, 'sales_member_presales_mdm_1', '1677615768.pdf', 'first proposal', '0', 'proposal', '2023-02-28 22:22:48', '2023-02-28 22:30:18', -1),
-(22, 'sales_member_presales_mdm_1', '0', '0', 'review this section', 'review', '2023-02-28 22:26:04', '2023-02-28 22:30:18', -1),
-(23, 'sales_member_presales_mdm_1', '1677616038.pdf', NULL, '0', 'proposal', '2023-02-28 22:27:18', '2023-02-28 22:30:18', -1);
 
 -- --------------------------------------------------------
 
@@ -257,24 +190,6 @@ CREATE TABLE `request_answers` (
   `answer` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `request_answers`
---
-
-INSERT INTO `request_answers` (`id`, `ticket_name`, `question`, `answer`) VALUES
-(6, 'sales_member_presales_member_1', 'text', 'text one'),
-(7, 'sales_member_presales_member_1', 'number', '3'),
-(8, 'sales_member_presales_member_1', 'dropdown', 'o2'),
-(9, 'sales_member_presales_member_1', 'checkbox', 'c2'),
-(10, 'sales_member_presales_member_1', 'radio', 'o2'),
-(11, 'sales_member_presales_member_1', 'how many', '4'),
-(12, 'sales_member_presales_member_1', 'check of them', 'ch2&&ch3'),
-(13, 'sales_member_presales_member_1', 'chose one', 'e3'),
-(14, 'sales_member_presales_member_1', 'which of thoes', 'option2'),
-(15, 'sales_member_presales_member_1', 'chose of them', 'option1&&op2'),
-(16, 'sales_member_presales_mdm_1', 'what', 'text one'),
-(17, 'sales_member_presales_mdm_1', 'how many', '3');
-
 -- --------------------------------------------------------
 
 --
@@ -315,14 +230,6 @@ CREATE TABLE `tickets` (
   `ticket_status` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `tickets`
---
-
-INSERT INTO `tickets` (`id`, `ticket_name`, `sales_id`, `presales_id`, `ticket_status`) VALUES
-(6, 'sales_member_presales_member_1', 10, 11, '2'),
-(7, 'sales_member_presales_mdm_1', 10, 13, '-1');
-
 -- --------------------------------------------------------
 
 --
@@ -341,17 +248,6 @@ CREATE TABLE `users` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `solution_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`id`, `name`, `email`, `role`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `solution_id`) VALUES
-(1, 'admin', 'rfpadmin@gmail.com', 'admin', NULL, '$2y$10$pWfTSJMlkrc6H7DI1RArvO8V7meYr2sXsTGgOB3Goq95R5VHLznlW', '', '2023-02-25 14:05:27', '2023-03-01 12:28:41', NULL),
-(10, 'sales_member', 'sales_member@gmail.com', 'team_sales_member', NULL, '$2y$10$WMumPvfiHWsmmlMgftzwoefXnoNgeas.KGcxxNiTBbraeytmbqFaW', NULL, '2023-02-28 18:24:17', '2023-02-28 18:24:17', NULL),
-(11, 'presales_member', 'presales_member@gmail.com', 'presales', NULL, '$2y$10$NB.vACE3PelUB.d0N33OiO.B9T1FqgPctIGBqZZEPct/3YLa4SY1e', NULL, '2023-02-28 18:25:22', '2023-02-28 18:25:22', 1),
-(12, 'hossam', 'hs1876@fayoum.edu.eg', 'team_sales_member', NULL, '$2y$10$cdc20tM4GhfKT2fWYu1ML.AcVySscf1vHKgYxFw..ZdHOEDMLOh0W', 'K2XVs2RsR1J0JZ4RrcW6IH7Mvg8bNtCFzedfs8VGtIeAJdzWewh1r5JHK7gx', '2023-02-28 19:07:08', '2023-03-04 12:07:46', NULL),
-(13, 'presales_mdm', 'mdm@gmail.com', 'presales', NULL, '$2y$10$Q/7SVe.C.arPNNfyJuGnsOuEfceJr2bfXT8bmtDqSee0esJm4A8P2', NULL, '2023-02-28 20:12:57', '2023-02-28 20:12:57', 2);
 
 --
 -- Indexes for dumped tables
@@ -449,13 +345,13 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `options`
 --
 ALTER TABLE `options`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -467,7 +363,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `proposals`
 --
 ALTER TABLE `proposals`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `questions`
@@ -485,7 +381,7 @@ ALTER TABLE `requests`
 -- AUTO_INCREMENT for table `request_answers`
 --
 ALTER TABLE `request_answers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `solutions`
@@ -497,13 +393,13 @@ ALTER TABLE `solutions`
 -- AUTO_INCREMENT for table `tickets`
 --
 ALTER TABLE `tickets`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
