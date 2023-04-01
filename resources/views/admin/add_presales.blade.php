@@ -1,107 +1,78 @@
-@extends('layouts.adminApp');
+@extends('layouts.adminApp')
+
 @section('content')
-
-<div >
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Adding new presales') }}</div>
-
-                <div class="card-body">
-                    <form method="POST" action="{{ route('admin.create_presales') }}">
-                        @csrf
-                        <div class="row mb-3">
-                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Title') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">{{ __('Adding new presales') }}</div>
+                    @if (!$solutions->count())
+                        <div class="card-body">
+                            <p class="text-danger">There are no solutions without presales members.</p>
                         </div>
+                    @else
+                        <div class="card-body">
+                            <form method="POST" action="{{ route('admin.create_presales') }}">
+                                @csrf
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">{{ __('Title') }}</label>
+                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autofocus>
+                                    @error('name')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
 
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">{{ __('Email Address') }}</label>
+                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required>
+                                    @error('email')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                                <div class="mb-3">
+                                    <label for="role" class="form-label">{{ __('User Role') }}</label>
+                                    <select id="role" name="role" class="form-control">
+                                        <option value="presales">Presales Member</option>
+                                    </select>
+                                    @error('role')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
 
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+                                <div class="mb-3">
+                                    <label for="solution_id" class="form-label">{{ __('Presales Solution') }}</label>
+                                    <select id="solution_id" name="solution_id" class="form-control">
+                                        @foreach ($solutions as $solution)
+                                            <option value="{{$solution->id}}">{{$solution->name}}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('solution_id')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">{{ __('Password') }}</label>
+                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required>
+                                    @error('password')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="password-confirm" class="form-label">{{ __('Confirm Password') }}</label>
+                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                                </div>
+
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-primary">{{ __('Add') }}</button>
+                                </div>
+                            </form>
                         </div>
-
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('User Role') }}</label>
-
-                            <div class="col-md-6">
-                                <select name="role" class="form-control">
-                                    <option selected value="presales">Prosales Member</option>
-                                  </select>
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Presales solution') }}</label>
-                            <div class="col-md-6">
-                                <select name="solution_id" class="form-control">
-                                     @foreach ($solutions as $solution)
-                                        <option selected value="{{$solution->id}}">{{$solution->name}}</option>
-                                    @endforeach
-                                  </select>
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-                        
-
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
-                        </div>
-
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Add') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                    @endif
                 </div>
             </div>
         </div>
     </div>
-</div>
 @endsection

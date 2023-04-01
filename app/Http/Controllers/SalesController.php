@@ -24,7 +24,7 @@ class SalesController extends Controller
        
     }
     public function follow_ticket(){
-        $tickets=Ticket::where('sales_id',auth()->user()->id)->paginate(10,['ticket_name','ticket_status']);
+          $tickets=Ticket::where('sales_id',auth()->user()->id)->orderBy('id','desc')->paginate(10,['ticket_name','ticket_status']);
         return view('sales.follow_ticket')->with('tickets',$tickets);
     }
     public function show_questions(HttpRequest $request){

@@ -1,4 +1,4 @@
-@extends('layouts.adminApp')
+{{-- @extends('layouts.adminApp')
 @section('content')
     <div class="container">
         
@@ -104,4 +104,95 @@
 
         
     </div>
+@endsection --}}
+@extends('layouts.adminApp')
+@section('content')
+<div class="container">
+
+    <table class="table table-striped table-hover">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Ticket name</th>
+            <th scope="col">Sales member title</th>
+            <th scope="col">Presales title</th>
+            <th scope="col">Request info</th>
+            <th scope="col">Proposal</th>
+            <th scope="col">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr class="table-warning">
+                <td colspan="7"><h3 class="text-center">Waiting</h3></td>
+            </tr>
+            @foreach ($waitings as $i=> $waiting)
+            <tr>
+                <th scope="row">{{$i+1}}</th>
+                <td>{{$waiting->ticket_name}}</td>
+                <td>{{$waiting->sales->name}}</td>
+                <td>{{$waiting->presales->name}}</td>
+                <td> <a href="{{route('admin.request_details',['ticket_name'=>$waiting->ticket_name])}}">Show request info</a> </td>
+                <td><a href="{{route('admin.show_proposal',['ticket_name'=>$waiting->ticket_name])}}">Show proposal</a></td>
+                <td class="table-warning">Waiting</td>
+              </tr>
+            @endforeach
+            <tr>       
+                <td colspan="7">{!! $waitings->links() !!}</td>
+           </tr>
+            <tr class="table-primary">
+                <td colspan="7"><h3 class="text-center">Pending</h3></td>
+            </tr>
+            @foreach ($pendings as $i=> $pending)
+            <tr>
+                <th scope="row">{{$i+1}}</th>
+                <td>{{$pending->ticket_name}}</td>
+                <td>{{$pending->sales->name}}</td>
+                <td>{{$pending->presales->name}}</td>
+                <td> <a href="{{route('admin.request_details',['ticket_name'=>$pending->ticket_name])}}">Show request info</a> </td>
+                <td><a href="{{route('admin.show_proposal',['ticket_name'=>$pending->ticket_name])}}">Show proposal</a></td>
+                <td class="table-primary">Pending</td>
+              </tr>
+            @endforeach 
+            <tr>       
+                <td colspan="7">{!! $pendings->links() !!}</td>
+           </tr>
+            <tr class="table-success">
+                <td colspan="7"><h3 class="text-center">Approved</h3></td>
+            </tr> 
+            @foreach ($approveds as $i=> $approved)
+            <tr>
+                <th scope="row">{{$i+1}}</th>
+                <td>{{$approved->ticket_name}}</td>
+                <td>{{$approved->sales->name}}</td>
+                <td>{{$approved->presales->name}}</td>
+                <td> <a href="{{route('admin.request_details',['ticket_name'=>$approved->ticket_name])}}">Show request info</a> </td>
+                <td><a href="{{route('admin.show_proposal',['ticket_name'=>$approved->ticket_name])}}">Show proposal</a></td>
+                <td class="table-success">Approved</td>
+              </tr>
+            @endforeach
+            <tr>       
+                 <td colspan="7">{!! $approveds->links() !!}</td>
+            </tr>
+            <tr class="table-danger">
+                <td colspan="7"><h3 class="text-center">Closed</h3></td>
+            </tr>  
+            @foreach ($closeds as $i=> $closed)
+            <tr>
+                <th scope="row">{{$i+1}}</th>
+                <td>{{$closed->ticket_name}}</td>
+                <td>{{$closed->sales->name}}</td>
+                <td>{{$closed->presales->name}}</td>
+                <td> <a href="{{route('admin.request_details',['ticket_name'=>$closed->ticket_name])}}">Show request info</a> </td>
+                <td><a href="{{route('admin.show_proposal',['ticket_name'=>$closed->ticket_name])}}">Show proposal</a></td>
+                <td class="table-danger">Closed</td>
+              </tr>
+            @endforeach   
+            <tr>       
+                <td colspan="7">{!! $closeds->links() !!}</td>
+           </tr>   
+        </tbody>
+      </table>
+
+    
+</div>
 @endsection

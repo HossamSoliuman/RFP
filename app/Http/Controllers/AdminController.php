@@ -24,6 +24,7 @@ class AdminController extends Controller
     }
     public function add_presales(){
         $solutions=Solution::whereDoesntHave('user')->get();
+       
         return view('admin.add_presales')->with('solutions',$solutions);
     }
     public function create_user(CreateUser $request){
@@ -80,7 +81,9 @@ class AdminController extends Controller
     }
     public function show_users(){
         $sales=User::where('role','team_sales_member')->get(['id','name','email']);
-        $presales=User::with('solution')->whereHas('solution')->where('role','presales')->get();
+
+       $presales=User::with('solution')->whereHas('solution')->where('role','presales')->get();
+        
         // return $presales;
         return view('admin.show_users')->with(['sales'=>$sales,'presales'=>$presales]);
     }

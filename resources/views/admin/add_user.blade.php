@@ -45,7 +45,7 @@
                             <div class="col-md-6">
                                 <select name="role" class="form-control">
                                     <option selected value="team_sales_member">Team Sales Member</option>
-                                  </select>
+                                </select>
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

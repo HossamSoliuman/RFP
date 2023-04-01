@@ -21,6 +21,9 @@ class Ticket extends Model
     public function request_answer(){
         return $this->hasMany(Request_answer::class,'ticket_name','ticket_name');
     }
+    public function proposal(){
+        return $this->hasMany(Proposal::class,'ticket_name','ticket_name');
+    }
     public function sales(){
         return $this->belongsTo(User::class,'sales_id','id');
     }
