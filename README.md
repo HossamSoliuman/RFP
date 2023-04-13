@@ -15,9 +15,9 @@ RFP (Request for Proposal) is a web-based bidding system where a sales represent
 
 Clone the repository to your local machine using the following command:
 ```shell
-git clone https://github.com/hossamsoliuman/petshop.git
+git clone https://github.com/hossamsoliuman/rfp.git
 
-cd petshop
+cd rfp
 ```
 
 Generate .env file
@@ -36,9 +36,9 @@ npm run dev
 ```
 
 Populate the tables to the database.
-Create a new database for the project and run the rfp.sql file located in the root directory to create the necessary tables:
+Create a new database for the project and run migration to create the necessary tables:
 ```shell
-mysql -u your_database_username -p your_database_name < rfp.sql
+php artisan migrate
 
 ```
 
@@ -61,10 +61,10 @@ Access the application in your web browser at http://localhost:8000.
 
 ## User Logins
 
-- Admin login: email: rfpadmin@gmail.com, password: 12345678.
-- Sales member login: email: sales_member@gmail.com, password: 12345678.
-- Presales member login: email: presales_member@gmail.com, password: 12345678.
+- Admin login: email: admin@example.com, password: admin@example.com.
+- Sales member login: email: sales@example.com, password: sales@example.com.
+- Presales member login: email: (any soluthion name)@example.com, password: same email.
 
-## Observation
+## Note
 
 I developed this project out of my head, not on YouTube
