@@ -15,13 +15,17 @@
        
         @forelse ($requests as $i=> $request)
         <tr>
+          @if ($request->request)
             <th scope="row">{{$i+1}}</th>
             <td>{{$request->ticket_name}}</td>
             <td>{{$request->sales->name}}</td>
             <td>{{$request->sales->email}}</td>
+           
             <td>{{$request->request->created_at}}</td>
             <td> <a href="{{route('presales.request_details',['ticket_name'=>$request->ticket_name])}}">show details</a></td>
           </tr>
+          @endif
+
         @empty
         <tr>
             <td colspan="6" class="text-center">You have no requests at this time</td>

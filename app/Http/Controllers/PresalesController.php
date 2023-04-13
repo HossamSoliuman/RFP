@@ -18,7 +18,9 @@ class PresalesController extends Controller
     }
     public function requests(){
         $id=auth()->user()->id;
-        $requests=Ticket::with('sales')->with('request')->where('presales_id',$id)->where('ticket_status',0)->get();
+        $requests=Ticket::with(['sales','request'])->where('presales_id',$id)->where('ticket_status',0)
+        ->orderBy('id','desc')
+        ->get();
         return view('presales.requests')->with('requests',$requests);
        
     }
@@ -49,7 +51,7 @@ class PresalesController extends Controller
         return redirect()->route('prsales.create_proposal',['ticket_name'=>$r->ticket_name]);
     }
     public function follow_ticket(){
-        $tickets=Ticket::where('presales_id',auth()->user()->id)->paginate(10,['ticket_name','ticket_status']);
+        $tickets=Ticket::where('presales_id',auth()->user()->id)->orderBy('id','desc')->paginate(10,['ticket_name','ticket_status']);
         return view('presales.follow_ticket')->with('tickets',$tickets);
     }
 }

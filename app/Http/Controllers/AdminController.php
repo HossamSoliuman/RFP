@@ -17,8 +17,28 @@ use Illuminate\Support\Facades\Hash;
 class AdminController extends Controller
 {
     public function index(){
-        return view('admin.profile');
+        $solutions = Solution::with(['user' => function ($query) {
+            $query->withCount('presales_tickets');
+            }])->get();
+        $pending_proposals= Ticket::where('ticket_status','0')
+        ->orWhere('ticket_status','0')->count();
+      
+        $complated_proposals= Ticket::where('ticket_status','2')->count();
+
+        $requestCounts = ModelsRequest::select('created_at')
+        ->get()
+        ->groupBy(function ($request) {
+            return $request->created_at->format('M');
+        })
+        ->map(function ($requests) {
+            return $requests->count();
+        })
+        ->values()
+        ->toArray();
+        
+        return view('admin.profile',compact(['solutions','pending_proposals','complated_proposals','requestCounts']));
     }
+
     public function add_user(){
         return view('admin.add_user');
     }
@@ -92,17 +112,12 @@ class AdminController extends Controller
         User::where('id',$id)->delete();
         return redirect()->route('admin.show_users')->with('msg','Succussfully Deleted');
     }
-    public function edit_presales(){
-
-    }
-    public function save_edit_presales(){
-
-    }
+  
     public function show_tickets(){
-        $waitings=Ticket::with(['sales','request'])->where('ticket_status',0)->paginate(5, ['*'], 'waitings');
-        $pendings=Ticket::with(['sales','request'])->where('ticket_status',1)->paginate(5, ['*'], 'pendings');
-        $approveds=Ticket::with(['sales','request'])->where('ticket_status',2)->paginate(5, ['*'], 'approveds');
-        $closeds=Ticket::with(['sales','request'])->where('ticket_status',-1)->paginate(5, ['*'], 'closeds');
+        $waitings=Ticket::with(['sales','request'])->where('ticket_status',0)->orderBy('id','desc')->paginate(5, ['*'], 'waitings');
+        $pendings=Ticket::with(['sales','request'])->where('ticket_status',1)->orderBy('id','desc')->paginate(5, ['*'], 'pendings');
+        $approveds=Ticket::with(['sales','request'])->where('ticket_status',2)->orderBy('id','desc')->paginate(5, ['*'], 'approveds');
+        $closeds=Ticket::with(['sales','request'])->where('ticket_status',-1)->orderBy('id','desc')->paginate(5, ['*'], 'closeds');
         
         return view('admin.show_tickets')->with([
             'waitings'=>$waitings,

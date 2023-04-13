@@ -37,11 +37,11 @@
                     <span class="fs-5 d-none d-sm-inline">Menu</span>
                 </a>
                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-                    {{-- <li class="nav-item">
+                    <li class="nav-item">
                         <a href="{{route('admin.profile')}}" class="nav-link align-middle px-0">
-                            <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Profile</span>
+                            <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Dashboard</span>
                         </a>
-                    </li> --}}
+                    </li>
                     <li>
                         <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
                             <i class="fs-4 bi-people"></i>  <span class="ms-1 d-none d-sm-inline">Members</span> </a>

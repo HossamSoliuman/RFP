@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Ticket;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,6 +19,7 @@ class RequestFactory extends Factory
     public function definition()
     {
         $tickets=Ticket::all(['ticket_name']);
+        $created_at= Carbon::now()->subMonth(rand(1,12));
         return [
             'cname'=>fake()->name(),
             'cphone'=>fake()->phoneNumber(),
@@ -28,6 +30,7 @@ class RequestFactory extends Factory
             'cr'=>'file.pdf',
             'gosi'=>'file.pdf',
             'ticket_name'=>$tickets[rand(0,$tickets->count()-1)]->ticket_name,
+            'created_at' => $created_at,
         ];
     }
 }

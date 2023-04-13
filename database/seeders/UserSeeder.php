@@ -27,6 +27,7 @@ class UserSeeder extends Seeder
         $this->call(PresalesSeeder::class);
         //sales
         User::factory()->create([
+            'name'=> 'sales',
             'role' => 'team_sales_member',
             'email'=>'sales@example.com',
             'password'=>Hash::make('sales@example.com')

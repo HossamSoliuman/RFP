@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PresalesController;
 use App\Http\Controllers\SalesController;
 use App\Models\Ticket;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -18,10 +19,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/s',function(){
-    $tickets=Ticket::all(['ticket_name','ticket_status']);
-     $ticket=$tickets[rand(0,$tickets->count()-1)];
-        $isApproved=['-1'=>-1,'0'=>0,'1'=>0,'2'=>1];
-       return $isApproved[$ticket->ticket_status];
+ for($i=1;$i<10;$i++){
+    echo $created_at = Carbon::now()->subMonth(rand(1, 12))
+    .'<br>';
+
+ }
 });
 Auth::routes(['register'=>false]);
 Route::get('/', function () {
